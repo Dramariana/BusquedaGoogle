@@ -1,0 +1,46 @@
+defaultTasks 'clean','test','aggregate'
+apply plugin: 'java'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:3.1.1")
+    }
+}
+
+apply plugin: 'net.serenity-bdd.aggregator'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+    // Serenity BDD
+    testImplementation 'net.serenity-bdd:serenity-core:3.6.12'
+    testImplementation 'net.serenity-bdd:serenity-junit:3.6.12'
+    testImplementation 'net.serenity-bdd:serenity-screenplay:3.6.12'
+    implementation 'net.serenity-bdd:serenity-cucumber:3.6.12'
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:3.6.12'
+
+    // Selenium
+    implementation 'org.seleniumhq.selenium:selenium-java:4.30.0'
+
+    // JUnit
+    testImplementation 'junit:junit:4.13.2'
+
+    // Logging
+    testImplementation 'org.slf4j:slf4j-simple:2.0.5'
+
+    // WebDriver Manager (para manejar drivers automáticamente)
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.7.0'
+
+
+}
+gradle.startParameter.continueOnFailure = true
